@@ -1,0 +1,32 @@
+<project name="PetsArena" default="build" basedir=".">
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir" value="${build.dir}/jar"/>
+    <property name="jar.name" value="PetsArena.jar"/>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" source="1.3" target="1.3" includeantruntime="false"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+        <jar destfile="${jar.dir}/${jar.name}" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="MIDlet-1" value="Pets Arena, , PetsArena"/>
+                <attribute name="MIDlet-Name" value="Pets Arena"/>
+                <attribute name="MIDlet-Vendor" value="Darwizl"/>
+                <attribute name="MIDlet-Version" value="1.0"/>
+                <attribute name="MicroEdition-Configuration" value="CLDC-1.1"/>
+                <attribute name="MicroEdition-Profile" value="MIDP-2.0"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="build" depends="clean, jar"/>
+</project>
